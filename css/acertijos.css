@@ -36,13 +36,15 @@
   gap:11px;
   align-items:flex-start;
   text-align:left;
-  background:rgba(232,192,125,.08);
-  border:1px solid rgba(232,192,125,.22);
+  background:rgba(14,10,24,.55);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(232,192,125,.3);
   border-radius:var(--r-s);
   padding:13px 16px;
   margin-bottom:9px;
   font-size:.95rem;
-  color:var(--tinta-suave);
+  color:var(--tinta);
   font-family:var(--serif);
   font-size:1.08rem;
   animation:entrar .5s var(--curva) both;

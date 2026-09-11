@@ -316,7 +316,10 @@
   border-left:2px solid var(--borde-fuerte);
   text-align:left;
   display:inline-block;
-  background:rgba(232,192,125,.06);
+  /* fondo propio: si no, sobre un cielo claro la cita se pierde */
+  background:rgba(14,10,24,.5);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
   border-radius:0 var(--r-s) var(--r-s) 0;
 }
 .recuerdo .marco{ margin:26px auto 0; max-width:400px; }
