@@ -172,23 +172,37 @@ const Piezas = (function () {
   }
 
   function palmera(c, x, z, suelo, tam, pal, rnd) {
-    const pasos = 5;
-    const curva = (rnd() - .5) * tam * .28;
+    // Tronco: muchos tramos cortos y solapados. Con pocos y anchos se veían
+    // los escalones entre uno y otro.
+    const pasos = 9;
+    const alto = tam * .66;
+    const curva = (rnd() - .5) * tam * .3;
     for (let i = 0; i < pasos; i++) {
-      const t = i / pasos;
+      const t = i / (pasos - 1);
       c.pieza("cilindro", pal.tronco, {
-        x: x + curva * t * t, y: suelo + tam * .62 * t, z,
-        ancho: tam * (.1 - t * .035), alto: tam * .64 / pasos * 1.25, fondo: tam * (.1 - t * .035)
+        x: x + curva * t * t, y: suelo + alto * t * .97, z,
+        ancho: tam * (.085 - t * .028), alto: alto / pasos * 1.5,
+        fondo: tam * (.085 - t * .028)
       });
     }
-    const cx = x + curva, cy = suelo + tam * .62;
-    for (let i = 0; i < 6; i++) {
-      const a = (i / 6) * Math.PI * 2;
-      c.pieza("caja", pal.hoja, {
-        x: cx + Math.cos(a) * tam * .26, y: cy - tam * .02, z: z + Math.sin(a) * tam * .26,
-        ancho: tam * .56, alto: tam * .035, fondo: tam * .14, giro: a, inclina: .22
-      });
+    // Hojas: penachos finos que caen, no tablones
+    const cx = x + curva, cy = suelo + alto;
+    const n = 7;
+    for (let i = 0; i < n; i++) {
+      const a = (i / n) * Math.PI * 2 + rnd() * .2;
+      const largo = tam * (.46 + rnd() * .16);
+      for (let j = 0; j < 3; j++) {
+        const t = (j + .5) / 3;
+        c.pieza("caja", pal.hoja, {
+          x: cx + Math.cos(a) * largo * t,
+          y: cy - tam * .015 - t * t * tam * .2,
+          z: z + Math.sin(a) * largo * t,
+          ancho: largo / 3 * 1.25, alto: tam * .022,
+          fondo: tam * (.11 - t * .06), giro: a, inclina: .1 + t * .3
+        });
+      }
     }
+    c.pieza("esfera", pal.hoja, { x: cx, y: cy - tam * .05, z, ancho: tam * .13, alto: tam * .11, fondo: tam * .13 });
     c.choque(x, z, tam * .1);
     c.sombra(cx, suelo, z, tam * .3);
   }

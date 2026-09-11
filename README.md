@@ -92,6 +92,11 @@ foto:    "media/fotos/aquel-dia.jpg"
 musica:  "media/musica/nuestra-cancion.mp3"
 ```
 
+**La foto de cada recuerdo se queda plantada en su sitio.** Al resolver un
+lugar, vuestra foto aparece enmarcada junto al pedestal y ahí se queda: si más
+adelante ella vuelve a pasear por el mundo, va encontrando vuestras fotos por el
+camino. Es como recorrer un álbum andando.
+
 Si no pones foto, **no pasa nada**: el mundo se construye solo a partir de la
 descripción del escenario.
 

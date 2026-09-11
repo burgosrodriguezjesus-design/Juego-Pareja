@@ -90,10 +90,13 @@ Esto es lo que hace que el juego sea imposible de repetir con otra persona.
 
 Las que quieras. Dime de cada una **de cuándo es y qué pasaba ahí**.
 
-Sirven para tres cosas:
-1. Fondo del capítulo (mejor apaisadas)
-2. El recuerdo que se desbloquea (cualquier formato)
+Sirven para cuatro cosas:
+1. **La que se queda en el mundo**: al resolver un sitio, la foto de ese recuerdo
+   aparece enmarcada allí para siempre. Si luego ella vuelve a pasear, se las va
+   encontrando por el camino. Esta es la que más merece la pena.
+2. La que se ve en la pantalla del recuerdo (cualquier formato)
 3. Convertirlas en acertijo: un rompecabezas, o "toca dónde estábamos"
+4. Fondo de las pantallas 2D (mejor apaisadas)
 
 ---
 

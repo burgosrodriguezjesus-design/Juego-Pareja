@@ -122,6 +122,7 @@ const Motor = (function () {
 
     document.body.classList.add("explorando");
     if (esTactil) document.body.classList.add("tactil");
+    Escena.pausar(true);          // el lienzo 2D queda tapado: que no gaste
     lienzo3d.classList.add("visible");
     capaMundo.hidden = false;
     mira.classList.add("visible");
@@ -143,6 +144,7 @@ const Motor = (function () {
   function salirDelMundo() {
     if (!enMundo) return;
     enMundo = false;
+    Escena.pausar(false);
     document.body.classList.remove("explorando", "con-panel");
     lienzo3d.classList.remove("visible");
     capaMundo.hidden = true;

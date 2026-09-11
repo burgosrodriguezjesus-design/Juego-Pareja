@@ -788,5 +788,14 @@ const Escena = (function () {
     if (!bucle) bucle = requestAnimationFrame(fotograma);
   }
 
-  return { iniciar, pintar };
+  /**
+   * Para el bucle de dibujo. Mientras se explora el mundo en 3D este
+   * lienzo está tapado: seguir pintándolo solo gasta batería.
+   */
+  function pausar(v) {
+    if (v) { if (bucle) { cancelAnimationFrame(bucle); bucle = null; } }
+    else if (!bucle && !document.hidden) bucle = requestAnimationFrame(fotograma);
+  }
+
+  return { iniciar, pintar, pausar };
 })();

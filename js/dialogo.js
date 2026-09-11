@@ -78,11 +78,18 @@ const Dialogo = (function () {
       if (e.target.closest("button,input,select,a,label,audio")) return;
       saltar();
     };
-    document.addEventListener("pointerdown", mano);
-    document.addEventListener("keydown", (e) => {
+    const tecla = (e) => {
       if (e.key === " " || e.key === "Enter" || e.key === "Escape") saltar();
-    });
-    if (hasta) hasta.then(() => document.removeEventListener("pointerdown", mano));
+    };
+    document.addEventListener("pointerdown", mano);
+    document.addEventListener("keydown", tecla);
+    // Los dos se quitan al acabar: si no, se acumula un oyente por capítulo.
+    const soltar = () => {
+      document.removeEventListener("pointerdown", mano);
+      document.removeEventListener("keydown", tecla);
+    };
+    if (hasta) hasta.then(soltar, soltar);
+    return soltar;
   }
 
   return { escribir, saltar, permitirSaltar, get activo() { return activo; } };

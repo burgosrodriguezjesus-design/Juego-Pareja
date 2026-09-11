@@ -21,6 +21,7 @@ const Mundo = (function () {
   let aguas = [], luzSol = null, luzAmbiente = null;
   let bucleId = null, t = 0, activo = false, pausado = false;
   let anclaFinal = null;
+  let marcos = [];
   let objetivo = -1;                 // índice del capítulo que toca
   let cercaDe = null;                // ancla al alcance
   let alInteractuar = null, alAcercarse = null;
@@ -180,35 +181,81 @@ const Mundo = (function () {
       }
 
       case "interior": {
-        // una casita en la que se entra: paredes, hueco de puerta y ventana
-        const y = suelo(cx, cz), an = 15, fo = 13, al = 4.2, gr = .5;
-        const muro = (x, z, a, h, giro) =>
-          c.pieza("caja", pal.muro, { x, y, z, ancho: a, alto: h, fondo: gr, giro });
-        muro(cx, cz - fo / 2, an, al, 0);                              // fondo
-        muro(cx - an / 2, cz, fo, al, Math.PI / 2);                    // izquierda
-        muro(cx + an / 2, cz, fo, al, Math.PI / 2);                    // derecha
-        muro(cx - an / 4 - 1, cz + fo / 2, an / 2 - 2, al, 0);         // frente, a un lado
-        muro(cx + an / 4 + 1, cz + fo / 2, an / 2 - 2, al, 0);         // frente, al otro
-        c.pieza("caja", pal.muro, { x: cx, y: y + 3.1, z: cz + fo / 2, ancho: 4, alto: al - 3.1, fondo: gr });
-        c.pieza("caja", pal.tejado, { x: cx, y: y + al, z: cz, ancho: an + 1.4, alto: .5, fondo: fo + 1.4 });
-        c.pieza("caja", pal.ventana, { x: cx - an / 2 + .1, y: y + 1.6, z: cz - 2,
-                                       ancho: 3.4, alto: 1.7, fondo: .12, giro: Math.PI / 2, brilla: deNoche });
-        // paredes con las que chocar
-        c.choque(cx, cz - fo / 2, 1.2); c.choque(cx - an / 2, cz, 1.2); c.choque(cx + an / 2, cz, 1.2);
-        for (let i = -an / 2; i <= an / 2; i += 1.6) {
-          c.choque(cx + i, cz - fo / 2, .9);
-          if (Math.abs(i) > 2.2) c.choque(cx + i, cz + fo / 2, .9);
+        // Una casa en la que se entra de verdad. La puerta mira siempre al
+        // centro del mundo, que es por donde se llega andando.
+        const y = suelo(cx, cz);
+        const an = 14, fo = 12, al = 3.9, gr = .45;
+        const rot = Math.atan2(-cx, -cz);
+        const S = Math.sin(rot), C = Math.cos(rot);
+        // de coordenadas de la casa a coordenadas del mundo
+        const P = (lx, lz) => ({ x: cx + lx * C + lz * S, z: cz - lx * S + lz * C });
+
+        const muro = (lx, lz, ancho, alto, giro) => {
+          const q = P(lx, lz);
+          c.pieza("caja", pal.muro, { x: q.x, y, z: q.z, ancho, alto, fondo: gr, giro: rot + giro });
+        };
+
+        muro(0, -fo / 2, an, al, 0);                       // fondo
+        muro(-an / 2, 0, fo, al, Math.PI / 2);             // izquierda
+        muro( an / 2, 0, fo, al, Math.PI / 2);             // derecha
+        // fachada con el hueco de la puerta en medio
+        const hueco = 2.6;
+        muro(-(an + hueco) / 4, fo / 2, (an - hueco) / 2, al, 0);
+        muro( (an + hueco) / 4, fo / 2, (an - hueco) / 2, al, 0);
+        const dintel = P(0, fo / 2);
+        c.pieza("caja", pal.muro, { x: dintel.x, y: y + 2.35, z: dintel.z,
+                                    ancho: hueco, alto: al - 2.35, fondo: gr, giro: rot });
+
+        // tejado a cuatro aguas
+        c.pieza("piramide", pal.tejado, { x: cx, y: y + al, z: cz,
+                                          ancho: (an + 1.6) * .98, alto: 2.6, fondo: (fo + 1.6) * .98,
+                                          giro: rot + Math.PI / 4 });
+        c.pieza("caja", pal.tejado, { x: cx, y: y + al - .28, z: cz,
+                                      ancho: an + 1.6, alto: .3, fondo: fo + 1.6, giro: rot });
+
+        // ventanas en los costados, encendidas si es de noche
+        for (const lado of [-1, 1]) {
+          for (const lz of [-2.8, 2.2]) {
+            const q = P(lado * (an / 2 - .04), lz);
+            c.pieza("caja", pal.ventana, { x: q.x, y: y + 1.5, z: q.z,
+                                           ancho: 2.0, alto: 1.5, fondo: .12,
+                                           giro: rot + Math.PI / 2, brilla: deNoche });
+          }
         }
-        for (let i = -fo / 2; i <= fo / 2; i += 1.6) {
-          c.choque(cx - an / 2, cz + i, .9); c.choque(cx + an / 2, cz + i, .9);
+        // y una en el fondo
+        const vf = P(0, -fo / 2 + .04);
+        c.pieza("caja", pal.ventana, { x: vf.x, y: y + 1.5, z: vf.z,
+                                       ancho: 2.4, alto: 1.5, fondo: .12, giro: rot, brilla: deNoche });
+
+        // escalón de la entrada
+        const esc = P(0, fo / 2 + .9);
+        c.pieza("caja", pal.roca, { x: esc.x, y: y - .12, z: esc.z,
+                                    ancho: hueco + 1.4, alto: .24, fondo: 1.6, giro: rot });
+
+        // paredes con las que chocar, dejando libre el hueco de la puerta
+        for (let i = -an / 2; i <= an / 2; i += 1.4) {
+          const a1 = P(i, -fo / 2); c.choque(a1.x, a1.z, .85);
+          if (Math.abs(i) > hueco / 2 + .4) { const a2 = P(i, fo / 2); c.choque(a2.x, a2.z, .85); }
         }
-        Piezas.mesa(c, cx, cz - 2, y, pal);
-        Piezas.silla(c, cx - 1.3, cz - 2, y, Math.PI / 2, pal);
-        Piezas.silla(c, cx + 1.3, cz - 2, y, -Math.PI / 2, pal);
-        Piezas.taza(c, cx - .3, cz - 1.75, y + .81, pal);
-        Piezas.taza(c, cx + .3, cz - 2.25, y + .81, pal);
-        if (deNoche) c.luz(cx, y + 3.6, cz, pal.luz, 1.3, 18);
-        esparcir(8, 20, R, (x, z, yy) => Piezas.arbol(c, x, z, yy, 5 + rnd() * 4, pal, rnd));
+        for (let i = -fo / 2; i <= fo / 2; i += 1.4) {
+          const b1 = P(-an / 2, i); c.choque(b1.x, b1.z, .85);
+          const b2 = P( an / 2, i); c.choque(b2.x, b2.z, .85);
+        }
+
+        // dentro: la mesa con dos tazas, apartada del ancla del centro
+        const m = P(0, -3.4);
+        Piezas.mesa(c, m.x, m.z, y, pal);
+        const s1 = P(-1.35, -3.4), s2 = P(1.35, -3.4);
+        Piezas.silla(c, s1.x, s1.z, y, rot + Math.PI / 2, pal);
+        Piezas.silla(c, s2.x, s2.z, y, rot - Math.PI / 2, pal);
+        const t1 = P(-.32, -3.15), t2 = P(.32, -3.65);
+        Piezas.taza(c, t1.x, t1.z, y + .81, pal);
+        Piezas.taza(c, t2.x, t2.z, y + .81, pal);
+
+        if (deNoche) c.luz(cx, y + 3.2, cz, pal.luz, 1.4, 20);
+        c.sombra(cx, y, cz, Math.max(an, fo) * .62);
+
+        esparcir(9, 22, R, (x, z, yy) => Piezas.arbol(c, x, z, yy, 5 + rnd() * 4, pal, rnd));
         break;
       }
 
@@ -246,16 +293,21 @@ const Mundo = (function () {
      Caminos del claro a cada sitio
      ========================================================== */
   function caminos(c, pal) {
-    const col = "#" + new THREE.Color(pal.tierra).lerp(new THREE.Color("#b8ac93"), .34).getHexString();
+    // Piedras sueltas, no un pavimento: marcan el camino sin comerse el paisaje.
+    const col = "#" + new THREE.Color(pal.tierra).lerp(new THREE.Color("#9c9280"), .3).getHexString();
+    const r = U.semilla("caminos");
     for (const zn of zonas) {
       const largo = Math.hypot(zn.x, zn.z);
       const dx = zn.x / largo, dz = zn.z / largo;
       const giro = -Math.atan2(dz, dx) + Math.PI / 2;
-      for (let d = 17; d < largo - zn.radio * .5; d += 3.1) {
+      for (let d = 17; d < largo - zn.radio * .5; d += 2.7) {
         const serp = Math.sin(d * .045) * 5.5;
-        const x = dx * d - dz * serp, z = dz * d + dx * serp;
+        const lado = (r() - .5) * 1.5;
+        const x = dx * d - dz * (serp + lado), z = dz * d + dx * (serp + lado);
+        const t = .8 + r() * .5;
         c.pieza("caja", col, {
-          x, y: altura(x, z) + .03, z, ancho: 2.4, alto: .08, fondo: 2.1, giro
+          x, y: altura(x, z) + .02, z,
+          ancho: 1.5 * t, alto: .07, fondo: 1.35 * t, giro: giro + (r() - .5) * .7
         });
       }
     }
@@ -312,6 +364,66 @@ const Mundo = (function () {
     g.add(luz);
 
     g.userData = { cristal, halo, haz, luz, ped };
+    return g;
+  }
+
+  /* ----------------------------------------------------------
+     Marco con vuestra foto, plantado al lado del pedestal.
+     Aparece cuando el recuerdo ya está abierto. La imagen se
+     carga la primera vez que hace falta; si no existe el
+     archivo, simplemente no se pone y no pasa nada.
+     ---------------------------------------------------------- */
+  function crearMarcoFoto(zn, pal, ruta) {
+    const g = new THREE.Group();
+    const L = Math.hypot(zn.x, zn.z) || 1;
+    // se planta a un lado del pedestal, mirando a quien llega
+    const nx = zn.x / L, nz = zn.z / L;
+    const lx = -nz, lz = nx;                       // perpendicular
+    const px = zn.x + lx * 2.6 - nx * .4;
+    const pz = zn.z + lz * 2.6 - nz * .4;
+    g.position.set(px, altura(px, pz), pz);
+    g.rotation.y = Math.atan2(-nx, -nz);
+
+    const ancho = 2.0, alto = 1.55, borde = .12, sobre = 1.15;
+
+    const madera = new THREE.MeshLambertMaterial({ color: pal.madera, flatShading: true });
+    const patas = new THREE.Mesh(new THREE.BoxGeometry(.14, sobre, .14), madera);
+    patas.position.set(-ancho / 2 + .25, sobre / 2, 0);
+    g.add(patas);
+    const patas2 = patas.clone();
+    patas2.position.x = ancho / 2 - .25;
+    g.add(patas2);
+
+    const tabla = new THREE.Mesh(
+      new THREE.BoxGeometry(ancho + borde * 2, alto + borde * 2 + .38, .1), madera);
+    tabla.position.set(0, sobre + (alto + .38) / 2, -.03);
+    g.add(tabla);
+
+    const foto = new THREE.Mesh(
+      new THREE.PlaneGeometry(ancho, alto),
+      new THREE.MeshBasicMaterial({ color: 0x1a1426 })
+    );
+    foto.position.set(0, sobre + .38 + alto / 2, .055);
+    g.add(foto);
+
+    g.userData = {
+      ruta, cargada: false,
+      cargar() {
+        if (this.cargada) return;
+        this.cargada = true;
+        new THREE.TextureLoader().load(
+          ruta,
+          (tex) => {
+            if (tex.encoding !== undefined) tex.encoding = THREE.sRGBEncoding;
+            foto.material.dispose();
+            foto.material = new THREE.MeshBasicMaterial({ map: tex, toneMapped: false });
+          },
+          undefined,
+          () => { g.visible = false; }      // la foto no existe: quitamos el marco
+        );
+      }
+    };
+    g.visible = false;
     return g;
   }
 
@@ -396,6 +508,12 @@ const Mundo = (function () {
 
     luzAmbiente = new THREE.HemisphereLight(pal.cieloMedio, pal.hierba, pal.ambienteFuerza);
     escena.add(luzAmbiente);
+
+    // Relleno frío desde el lado opuesto: con el sol tan bajo, sin esto las
+    // caras en sombra se quedan completamente negras.
+    const relleno = new THREE.DirectionalLight(pal.cieloMedio, .42);
+    relleno.position.set(-luzSol.position.x, 260, -luzSol.position.z);
+    escena.add(relleno);
     escena.add(new THREE.AmbientLight(pal.ambiente, .3));
 
     astro = Paisaje.crearAstro(pal);
@@ -403,7 +521,7 @@ const Mundo = (function () {
     escena.add(astro);
 
     // 4 · terreno
-    const divisiones = calidad >= 1 ? 168 : 112;
+    const divisiones = calidad >= 1 ? 168 : 132;
     escena.add(Paisaje.crearTerreno(LADO_TERRENO, divisiones, altura, zonas, pal));
 
     // 5 · agua
@@ -431,10 +549,19 @@ const Mundo = (function () {
     }
 
     // 7 · anclas: una en cada sitio, y la del final en el claro
+    marcos = [];
     anclas = zonas.filter((z) => !z.central).map((zn) => {
       const a = crearAncla(zn, pal);
       a.userData.zona = zn;
       escena.add(a);
+      const rutaFoto = zn.cap && zn.cap.recuerdo && zn.cap.recuerdo.foto;
+      if (rutaFoto) {
+        const m = crearMarcoFoto(zn, pal, rutaFoto);
+        m.userData.zonaId = zn.id;
+        marcos.push(m);
+        escena.add(m);
+        c.choque(m.position.x, m.position.z, .9);
+      }
       return a;
     });
 
@@ -475,6 +602,12 @@ const Mundo = (function () {
     anclas.forEach((a) => {
       const zn = a.userData.zona;
       pintarAncla(a, a.userData.hecho ? "hecha" : (zn.i === objetivo ? "toca" : "dormida"));
+    });
+
+    marcos.forEach((m) => {
+      const abierto = hechos.includes(m.userData.zonaId);
+      m.visible = abierto;
+      if (abierto) m.userData.cargar();
     });
 
     if (anclaFinal) {
@@ -647,6 +780,7 @@ const Mundo = (function () {
 
     /** Solo para las pruebas automáticas. */
     __zonas() { return zonas; },
+    __ren()   { return ren; },
 
     get hayObjetivo() { return objetivo >= 0; },
     get objetivo() { return objetivo; },
