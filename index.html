@@ -14,10 +14,14 @@
 <link rel="stylesheet" href="css/escena.css">
 <link rel="stylesheet" href="css/ui.css">
 <link rel="stylesheet" href="css/acertijos.css">
+<link rel="stylesheet" href="css/mundo.css">
 </head>
 <body>
 
-<!-- ===== FONDO: paisaje dibujado + foto opcional + atmósfera ===== -->
+<!-- ===== MUNDO 3D ===== -->
+<canvas id="lienzo3d" aria-hidden="true"></canvas>
+
+<!-- ===== FONDO 2D: se usa en portada, prólogo y carta, y si no hay 3D ===== -->
 <div id="mundo">
   <canvas id="lienzo" aria-hidden="true"></canvas>
   <div id="foto-fondo" aria-hidden="true"></div>
@@ -48,6 +52,38 @@
 <!-- ===== CONTENIDO ===== -->
 <main id="escenario" tabindex="-1"></main>
 
+<!-- ===== INTERFAZ DEL MUNDO 3D ===== -->
+<div id="capa-mundo" hidden>
+  <div id="brujula">
+    <span id="brujula-flecha">▲</span>
+    <span id="brujula-texto"></span>
+    <span id="brujula-dist"></span>
+  </div>
+
+  <div id="mira"></div>
+
+  <div id="cartel-objeto" hidden>
+    <span id="cartel-titulo"></span>
+    <span id="cartel-accion"></span>
+  </div>
+
+  <div id="mandos">
+    <div id="palanca"><div id="palanca-bola"></div></div>
+  </div>
+
+  <button id="btn-tocar" type="button" hidden>
+    <span class="ico">✦</span>
+    <span class="txt">Tocar</span>
+  </button>
+
+  <div id="aviso-raton" hidden>
+    <div class="caja">
+      <p class="grande">Toca la pantalla para mirar alrededor</p>
+      <p class="chica">Moverse: <b>W A S D</b> o las flechas · Correr: <b>Mayúsculas</b> · Salir del ratón: <b>Esc</b></p>
+    </div>
+  </div>
+</div>
+
 <!-- ===== CAPAS FLOTANTES ===== -->
 <div id="celebracion" aria-hidden="true"></div>
 <div id="transicion" aria-hidden="true"></div>
@@ -56,6 +92,7 @@
 <audio id="pista-musica" loop preload="none"></audio>
 
 <!-- ===== CÓDIGO ===== -->
+<script src="vendor/three.min.js"></script>
 <script src="contenido/historia.js"></script>
 <script src="js/util.js"></script>
 <script src="js/audio.js"></script>
@@ -63,6 +100,10 @@
 <script src="js/dialogo.js"></script>
 <script src="js/acertijos.js"></script>
 <script src="js/album.js"></script>
+<script src="js/mundo/piezas.js"></script>
+<script src="js/mundo/paisaje.js"></script>
+<script src="js/mundo/jugador.js"></script>
+<script src="js/mundo/mundo.js"></script>
 <script src="js/motor.js"></script>
 <script src="js/main.js"></script>
 </body>

@@ -35,6 +35,11 @@ const HISTORIA = {
     // Nombre con el que se guarda la partida (no lo cambies una vez se lo des)
     partida: "nuestra-historia-v1",
 
+    // El juego se recorre andando por un mundo en 3D, en primera persona.
+    // Si el móvil o el ordenador no puede con el 3D, se pasa solo a las
+    // pantallas en 2D sin perder nada. Ponlo en false para forzar el 2D.
+    mundo3d: true,
+
     // Si lo pones en true, se puede saltar cualquier acertijo tras muchos
     // intentos fallidos. Recomendado dejarlo en true: es un regalo, no un examen.
     permitirRendirse: true,

@@ -205,3 +205,37 @@ vas a llevar, `TE QUIERO`, `CASA`, la fecha de algo…
 
 Si no quieres candado final, quita el `fragmento` de todos los capítulos y deja
 `clave: ""`.
+
+---
+
+## Y el sitio donde ocurre cada acertijo
+
+Cada capítulo describe su lugar del mundo con tres palabras:
+
+```js
+escena: { tipo: "pueblo", momento: "noche", clima: "nieve" }
+```
+
+| `tipo` | qué se construye |
+|---|---|
+| `ciudad` | manzanas de edificios con las ventanas encendidas, farolas, bancos y coches |
+| `playa` | arena, mar, palmeras, sombrillas y rocas |
+| `montana` | cordillera alrededor, pinos y peñascos |
+| `campo` | lomas suaves, árboles, matorrales y una valla |
+| `bosque` | pinos y árboles espesos |
+| `pueblo` | casas con tejado, campanario y farolas |
+| `carretera` | una recta de asfalto con su línea, postes y un coche parado |
+| `parque` | árboles, bancos, farolas y setos |
+| `lago` | agua, pinos, rocas y una barca |
+| `interior` | una casa en la que se entra: mesa, dos sillas, dos tazas y una ventana |
+| `cielo` | una loma abierta, sin más |
+
+`momento` es `amanecer`, `dia`, `atardecer` o `noche`.
+`clima` es `despejado`, `lluvia`, `nieve`, `petalos`, `estrellas`,
+`luciernagas` o `niebla`.
+
+**La hora y el clima de todo el mundo los marca el primer capítulo**, porque el
+mundo es continuo. El `tipo` sí es propio de cada capítulo.
+
+Si además pones una foto en `escena.foto`, se usa en las pantallas 2D (portada,
+respaldo). Dentro del mundo 3D el sitio se construye con las formas.

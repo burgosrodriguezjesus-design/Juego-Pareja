@@ -20,22 +20,35 @@ funciona: los acertijos buenos salen de las cosas pequeñas, no de las grandes.
 
 ## 2. Los lugares — **lo más importante**
 
-Piensa en **5 a 8 sitios reales** vuestros. No tienen que ser espectaculares:
-el banco donde os sentabais vale más que una capital extranjera.
+Cada sitio vuestro se convierte en **un lugar del mundo al que ella va andando**.
+Así que esta es la parte que más cunde.
+
+Piensa en **5 a 8 sitios reales**. No tienen que ser espectaculares: el banco
+donde os sentabais vale más que una capital extranjera.
 
 Para cada uno:
 
 - **Qué sitio es** (nombre real, aunque sea "la esquina de la calle X")
 - **Qué pasó ahí** — la anécdota concreta
 - **Por qué importa** — qué sentiste tú
-- **Cómo es el sitio**: ¿playa, ciudad, monte, campo, bosque, pueblo, carretera,
-  parque, interior, lago? ¿De día, al atardecer, de noche, al amanecer?
-  ¿Llovía, hacía sol, había niebla?
-- **¿Tienes foto?** (si no, no pasa nada: el juego dibuja el paisaje solo)
+- **Cómo es el sitio**, eligiendo de estas listas:
+  - *Qué clase de sitio*: `ciudad` · `playa` · `montana` · `campo` · `bosque` ·
+    `pueblo` · `carretera` · `parque` · `interior` (una casa o un bar en el que
+    se entra) · `lago`
+  - *A qué hora*: `amanecer` · `dia` · `atardecer` · `noche`
+  - *Qué tiempo hacía*: `despejado` · `lluvia` · `nieve` · `petalos` ·
+    `estrellas` · `luciernagas` · `niebla`
+- **¿Tienes foto?** (si no, no pasa nada: el sitio se construye solo)
 
-> El juego pinta el escenario a partir de esa descripción, así que si me dices
-> "un pueblo de noche con las ventanas encendidas" o "una carretera de noche,
-> volviendo", eso es exactamente lo que va a ver ella.
+> Con eso se levanta el lugar entero: una ciudad con las ventanas encendidas,
+> un pueblo con su campanario, una playa con palmeras y mar, una carretera con
+> sus postes, un lago con una barca, o una casa en la que entras y hay dos tazas
+> en la mesa. Ella va a poder pasear por dentro.
+
+> **Un detalle importante:** el mundo es continuo, así que no puede ser de noche
+> en un sitio y de día en el de al lado. La hora y el tiempo de todo el mundo los
+> marca el **primer capítulo**. Piensa qué ambiente quieres para el conjunto
+> (un atardecer, una noche estrellada, un amanecer con niebla) y ponlo ahí.
 
 ---
 
@@ -67,7 +80,9 @@ Esto es lo que hace que el juego sea imposible de repetir con otra persona.
 
 - **Vuestra canción** (la que sea, aunque dé vergüenza)
 - Canciones de momentos concretos: el viaje, la primera cita, esa noche
-- Si me pasas los archivos `.mp3` los meto y suenan durante el capítulo
+- Si me pasas los archivos `.mp3` los meto y **cada canción empieza a sonar
+  cuando ella llega andando a ese sitio**, y se funde con la siguiente al salir.
+  Es de las cosas que mejor funcionan de todo el juego.
 
 ---
 
@@ -83,6 +98,9 @@ Sirven para tres cosas:
 ---
 
 ## 7. El final
+
+El viaje acaba en un claro en el centro del mundo, con un círculo de piedras.
+Ahí es donde ella mete la palabra y se abre la carta.
 
 - ¿Qué palabra quieres que forme el mensaje secreto?
   Se construye letra a letra según va resolviendo. Ejemplos: `SIEMPRE`,
