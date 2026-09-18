@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111f2a">
+<title>La hora azul · Para Alicia</title>
+<meta name="description" content="Una aventura en primera persona por los lugares de nuestra historia.">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+
+<canvas id="lienzo"></canvas>
+
+<header id="cabecera" hidden>
+  <p id="subtitulo"></p>
+  <h1 id="titulo"></h1>
+</header>
+
+<section id="objetivo" hidden>
+  <small>Ahora</small>
+  <p id="objetivo-txt"></p>
+  <span id="progreso"></span>
+</section>
+
+<div id="mira"></div>
+
+<div id="cartel" hidden>
+  <span id="cartel-txt"></span>
+  <span id="cartel-acc"></span>
+</div>
+
+<div id="aviso" hidden></div>
+
+<footer id="controles">
+  <button id="btn-pista">Una pista <b>H</b></button>
+  <span id="guardado">Guardado en este navegador</span>
+</footer>
+
+<div id="mandos">
+  <div id="palanca"><div id="bola"></div></div>
+</div>
+<button id="btn-tocar" hidden><span>✦</span>Tocar</button>
+<button id="btn-foto" hidden><span>◎</span>Foto</button>
+
+<div id="aviso-raton" hidden>
+  <div>Toca la pantalla para mirar alrededor</div>
+</div>
+
+<div id="panel" hidden>
+  <div id="panel-caja"></div>
+</div>
+
+<script type="importmap">
+{ "imports": {
+    "three": "./vendor/three.module.js",
+    "three/addons/": "./vendor/jsm/"
+} }
+</script>
+
+<script type="module">
+  import { Juego } from './motor/juego.js';
+  const j = new Juego();
+  document.documentElement.style.setProperty('--escala', j.estado.ajustes.texto);
+  j.render.ponerCalidad(j.estado.ajustes.calidad);
+  j.arrancar();
+  window.__juego = j;   // para las pruebas
+</script>
+</body>
+</html>
