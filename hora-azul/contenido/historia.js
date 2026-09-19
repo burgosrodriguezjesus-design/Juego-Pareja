@@ -10,8 +10,7 @@
 
    Las respuestas ya están puestas: los sabores de Martonela,
    Spider-Man en el Yelmo, el campero Chef de Mya y See You Again
-   en la radio del Ibiza. Queda un «PENDIENTE», y es opcional:
-   confirmar el orden de las campanas de Fratelly.
+   en la radio del Ibiza. Ya no queda nada por rellenar.
    ============================================================ */
 
 export const NOSOTROS = {
@@ -248,12 +247,12 @@ export const LUGARES = [
   id: 'fratelly',
   titulo: 'Fratelly · El Palo',
   subtitulo: '04 · La música del frío',
-  intro: 'Las campanas de la heladería suenan en el orden en que pedís siempre. ' +
-         'Repítelo y la máquina se pone en marcha.',
-  objetivo: 'Repite vuestro pedido y estabiliza el frío.',
+  intro: 'Las campanas de la heladería suenan en el orden en que lo pides ' +
+         'siempre. Repítelo y la máquina se pone en marcha.',
+  objetivo: 'Repite tu pedido y estabiliza el frío.',
   pistas: [
-    'No es un orden cualquiera: es el vuestro.',
-    'Primero el tuyo, después el suyo.',
+    'No es un orden cualquiera: es el tuyo.',
+    'Las dos bolas son tuyas. No hay que repartir nada.',
     'Chocolate negro y después Bruce.'
   ],
   recuerdo: 'Chocolate negro y Bruce, el helado de brownie. ' +
@@ -276,7 +275,9 @@ export const LUGARES = [
     pos: [0, 1.3, -4],
     nombre: 'las campanas',
     pregunta: 'Tócalas en el orden de siempre.',
-    // PENDIENTE · si el orden real es al revés, cámbialo aquí
+    // Las dos son de Alicia. El orden sale de su propio recuerdo:
+    // «Chocolate negro y Bruce». Si alguna vez va al revés, gira
+    // `correcta` y ya está.
     campanas: [
       { nombre:'Chocolate negro', color:'#4a2f26' },
       { nombre:'Bruce',           color:'#8d5a3f' },

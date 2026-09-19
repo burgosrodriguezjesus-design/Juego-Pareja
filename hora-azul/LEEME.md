@@ -30,8 +30,7 @@ sus pistas y sus acertijos.
 Las respuestas vuestras ya están dentro: los sabores de Martonela, Spider-Man
 en el Yelmo, el campero Chef de Mya y *See You Again* en la radio del Ibiza.
 
-Queda un **PENDIENTE**, y es opcional: confirmar el orden de las campanas de
-Fratelly (ahora suena chocolate negro y después Bruce).
+Ya no queda nada por rellenar.
 
 ## Cómo está montado
 
