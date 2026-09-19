@@ -5,19 +5,33 @@ los recuerdos y la carta son los originales, rescatados del compilado anterior.
 
 ## Cómo abrirlo
 
+Doble clic en **`EMPEZAR-mac.command`** (o `EMPEZAR-windows.bat`, o
+`./empezar-linux.sh`). Se abre el navegador solo. Para cerrarlo, cierra la
+ventana negra que se queda detrás.
+
+La primera vez en Mac puede salir un aviso de seguridad: clic derecho sobre el
+archivo → **Abrir** → **Abrir**. Solo hace falta una vez.
+
+Si prefieres hacerlo a mano, es lo mismo que:
+
 ```
 node SERVIR.mjs
 ```
 
-y abre **http://127.0.0.1:4173**
+y abrir **http://127.0.0.1:4173**
 
-Para verlo en el móvil desde el mismo wifi:
+### Para jugarlo en el móvil
+
+Con el teléfono en el mismo wifi:
 
 ```
 RED=1 node SERVIR.mjs
 ```
 
-Te dirá por pantalla a qué dirección entrar desde el teléfono.
+Te dirá por pantalla a qué dirección entrar desde el teléfono. Sale un joystick
+en la mitad izquierda y se mira arrastrando en la derecha.
+
+> Hace falta **Node** instalado (https://nodejs.org). Es lo único.
 
 > No vale con hacer doble clic en `index.html`: el navegador bloquea los
 > módulos al abrirlos como archivo suelto y sale una pantalla en blanco.
