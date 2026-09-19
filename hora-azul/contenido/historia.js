@@ -8,9 +8,11 @@
    tuyos, palabra por palabra. Lo que ha cambiado son los
    acertijos, para que necesiten a Alicia y no a cualquiera.
 
-   Busca «PENDIENTE» para ver lo que falta por rellenar: son las
-   respuestas que solo sabéis vosotros. El juego funciona con lo
-   que hay puesto, pero esas son las que lo hacen vuestro.
+   Las respuestas ya están puestas: los sabores de Martonela,
+   Spider-Man en el Yelmo, el campero Chef de Mya y See You Again
+   en la radio del Ibiza. Quedan dos «PENDIENTE», los dos
+   opcionales: las fotos de la Malagueta y confirmar el orden de
+   las campanas de Fratelly.
    ============================================================ */
 
 export const NOSOTROS = {
@@ -148,10 +150,10 @@ export const LUGARES = [
     nombre: 'las cubetas',
     pregunta: '¿Cuáles son los dos de siempre?',
     cuantos: 2,
-    // PENDIENTE · pon aquí los sabores que tenga la carta de verdad.
-    // Cuantos más haya, más mérito tiene acordarse.
-    opciones: ['Turrón', 'Caramelo salado', 'Chocolate negro', 'Pistacho',
-               'Stracciatella', 'Fresa', 'Limón', 'Tiramisú', 'Nata', 'Mango'],
+    // La carta de verdad. Los dos vuestros están escondidos entre los demás.
+    opciones: ['Kinder', 'Turrón', 'Nutella', 'Caramelo salado', 'Almendrado',
+               'Chocolate negro', 'Pistacho', 'Stracciatella', 'Fresa',
+               'Limón', 'Tiramisú', 'Nata'],
     correctas: ['Turrón', 'Caramelo salado'],
     alAcertar: 'Dos bolas, la tarrina lista.'
   }
@@ -207,12 +209,12 @@ export const LUGARES = [
   titulo: 'Yelmo · Plaza Mayor',
   subtitulo: '03 · Nuestra próxima sesión',
   intro: 'La sala está esperando. En la pared hay tres carteles, ' +
-         'y la pantalla no se enciende hasta que estén en su sitio.',
-  objetivo: 'Pon las tres en el orden en que las visteis.',
+         'y la pantalla no se enciende hasta que elijas el vuestro.',
+  objetivo: 'Elige el cartel de la que visteis juntos.',
   pistas: [
-    'No es el orden en que están colgadas.',
-    'Piensa en cuál fue la primera que visteis juntos.',
-    'De la más antigua a la más reciente, de izquierda a derecha.'
+    'Solo uno de los tres es vuestro.',
+    'No es de las que ponen los domingos por la tarde.',
+    'El de las telarañas.'
   ],
   recuerdo: 'Casi todas las semanas buscamos otra película que ver juntos. ' +
             'Lo especial también puede ser un plan que se repite.',
@@ -234,9 +236,10 @@ export const LUGARES = [
     tipo: 'ordenar',
     pos: [0, 1.4, -10.6],
     nombre: 'los tres carteles',
-    pregunta: '¿En qué orden las visteis?',
-    // PENDIENTE · las tres películas de verdad, de la primera a la última
-    elementos: ['La primera que vimos juntos', 'La del sofá y la manta', 'La última que vimos'],
+    pregunta: 'Tres carteles. ¿Cuál visteis juntos?',
+    modo: 'elegirUna',
+    elementos: ['Una de miedo', 'Una de coches', 'Spider-Man'],
+    correcta: 2,
     alAcertar: 'La sala se ilumina.'
   }
 },
@@ -295,8 +298,8 @@ export const LUGARES = [
   objetivo: 'Prepara vuestro pedido y contrólalo en la plancha.',
   pistas: [
     'Es lo que pedís siempre, sin mirar la carta.',
-    'Un plato principal y poco más.',
-    'El campero.'
+    'Es un campero, pero no vale cualquiera.',
+    'El Chef.'
   ],
   recuerdo: 'El amor también tiene una mesa y un pedido favorito.',
   cielo: P.ambar,
@@ -318,9 +321,10 @@ export const LUGARES = [
     nombre: 'la comanda',
     pregunta: '¿Qué pedís siempre?',
     cuantos: 1,
-    // PENDIENTE · añade lo que pidáis de verdad, y relleno plausible
-    opciones: ['Campero', 'Ensaladilla', 'Pizza', 'Hamburguesa', 'Sardinas', 'Tortilla'],
-    correctas: ['Campero'],
+    // Todos son camperos menos dos: hay que saber cuál.
+    opciones: ['Campero Chef', 'Campero de pollo', 'Campero especial',
+               'Campero de lomo', 'Hamburguesa', 'Ensaladilla'],
+    correctas: ['Campero Chef'],
     alAcertar: 'A la plancha.',
     // después, el tostado
     despues: {
@@ -345,7 +349,7 @@ export const LUGARES = [
   pistas: [
     'Solo una de las tres es vuestra.',
     'Es la que cantas mal a propósito.',
-    'La del medio.'
+    'Tyler, the Creator.'
   ],
   recuerdo: 'Alicia conduce el Seat Ibiza 1.9 de cinco puertas de 2004, verde oscuro. ' +
             'Un paseo tranquilo al atardecer.',
@@ -367,8 +371,9 @@ export const LUGARES = [
     nombre: 'la radio',
     pregunta: 'Tres emisoras. Solo una es vuestra.',
     modo: 'elegirUna',
-    // PENDIENTE · pon vuestra canción en el medio y dos plausibles a los lados
-    elementos: ['La que ponía la radio siempre', 'NUESTRA CANCIÓN', 'La del anuncio'],
+    elementos: ['Blinding Lights · The Weeknd',
+                'See You Again · Tyler, the Creator',
+                'La Bachata · Manuel Turizo'],
     correcta: 1,
     alAcertar: 'Suena. Arranca el coche.'
   }

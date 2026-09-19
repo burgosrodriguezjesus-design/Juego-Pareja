@@ -25,11 +25,16 @@ Te dirá por pantalla a qué dirección entrar desde el teléfono.
 ## Lo que hay que tocar
 
 **`contenido/historia.js`** y nada más. Ahí están los ocho lugares, sus textos,
-sus pistas y sus acertijos. Busca **PENDIENTE** para ver lo que falta por
-rellenar: son las respuestas que solo sabéis vosotros (la canción, las
-películas, los sabores de la carta).
+sus pistas y sus acertijos.
 
-El juego funciona con lo que hay puesto; esas son las que lo hacen vuestro.
+Las respuestas vuestras ya están dentro: los sabores de Martonela, Spider-Man
+en el Yelmo, el campero Chef de Mya y *See You Again* en la radio del Ibiza.
+
+Quedan dos **PENDIENTE**, los dos opcionales:
+
+- tres fotos vuestras de la Malagueta, si las quieres en el acertijo del encuadre;
+- confirmar el orden de las campanas de Fratelly (ahora: chocolate negro y
+  después Bruce).
 
 ## Cómo está montado
 
