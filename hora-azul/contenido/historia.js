@@ -10,9 +10,8 @@
 
    Las respuestas ya están puestas: los sabores de Martonela,
    Spider-Man en el Yelmo, el campero Chef de Mya y See You Again
-   en la radio del Ibiza. Quedan dos «PENDIENTE», los dos
-   opcionales: las fotos de la Malagueta y confirmar el orden de
-   las campanas de Fratelly.
+   en la radio del Ibiza. Queda un «PENDIENTE», y es opcional:
+   confirmar el orden de las campanas de Fratelly.
    ============================================================ */
 
 export const NOSOTROS = {
@@ -164,8 +163,8 @@ export const LUGARES = [
   id: 'malagueta',
   titulo: 'La Malagueta',
   subtitulo: '02 · Aprender a mirar',
-  intro: 'En el banco hay tres fotos clavadas. Colócate donde se hicieron ' +
-         'y recompón el encuadre.',
+  intro: 'El paseo guarda tres encuadres. Recoge la cámara, encuentra las ' +
+         'marcas del suelo y fotografía el quiosco, la palmera y el horizonte.',
   objetivo: 'Encuentra los tres encuadres y vuelve al banco.',
   pistas: [
     'Las marcas del suelo son sitios desde los que mirar.',
@@ -191,8 +190,8 @@ export const LUGARES = [
   acertijo: {
     tipo: 'encuadre',
     camara: { pos:[2, 0.75, 4.6], nombre:'la cámara' },
-    // PENDIENTE · si tienes tres fotos vuestras de la Malagueta, van aquí
-    // como `foto:'media/fotos/....jpg'` y se ven al acertar cada encuadre.
+    // Si algún día quieres que salga una foto vuestra al acertar un
+    // encuadre, añádele `foto:'media/fotos/loquesea.jpg'` y ya está.
     encuadres: [
       { marca:[-6, 0, 0], mira:[-11, 2, -3],  nombre:'el quiosco' },
       { marca:[ 3, 0, 0], mira:[  9, 5, -4],  nombre:'la palmera' },
