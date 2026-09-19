@@ -5,7 +5,21 @@ los recuerdos y la carta son los originales, rescatados del compilado anterior.
 
 ## Cómo abrirlo
 
-Doble clic en **`EMPEZAR-mac.command`** (o `EMPEZAR-windows.bat`, o
+**Doble clic en `La-hora-azul.html`.** Se abre en el navegador y ya está: no
+hace falta servidor, ni Node, ni instalar nada. Ese archivo lleva el juego
+entero dentro (Three.js incluido), por eso pesa casi un mega.
+
+Es un archivo **generado**: no lo edites, porque se sobrescribe. Cuando cambies
+algo en `contenido/historia.js`, vuelve a hacerlo con:
+
+```
+npm i esbuild && node EMPAQUETAR.mjs
+```
+
+### Con servidor (para desarrollar)
+
+Mientras toqueteas el juego es más cómodo servir la carpeta, porque así no hay
+que reempaquetar en cada cambio: doble clic en **`EMPEZAR-mac.command`** (o `EMPEZAR-windows.bat`, o
 `./empezar-linux.sh`). Se abre el navegador solo. Para cerrarlo, cierra la
 ventana negra que se queda detrás.
 
@@ -22,16 +36,23 @@ y abrir **http://127.0.0.1:4173**
 
 ### Para jugarlo en el móvil
 
-Con el teléfono en el mismo wifi:
+Lo más fácil: pásale `La-hora-azul.html` al teléfono (AirDrop, correo, lo que
+sea) y ábrelo. Al ser un archivo suelto, no necesita nada más.
+
+Si estás desarrollando y quieres verlo en el móvil sin reempaquetar, con el
+teléfono en el mismo wifi:
 
 ```
 RED=1 node SERVIR.mjs
 ```
 
-Te dirá por pantalla a qué dirección entrar desde el teléfono. Sale un joystick
-en la mitad izquierda y se mira arrastrando en la derecha.
+Te dirá por pantalla a qué dirección entrar desde el teléfono.
 
-> Hace falta **Node** instalado (https://nodejs.org). Es lo único.
+En el móvil sale un joystick en la mitad izquierda y se mira arrastrando en la
+derecha.
+
+> Node solo hace falta para el servidor y para reempaquetar. Para **jugar** no
+> hace falta nada.
 
 > No vale con hacer doble clic en `index.html`: el navegador bloquea los
 > módulos al abrirlos como archivo suelto y sale una pantalla en blanco.
